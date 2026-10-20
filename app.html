@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thread Math - app</title>
+<style>
+  :root { --accent:#c2570c; --ink:#3a1c06; --paper:#fdf6ef; --soft:#f6e3d0; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:Georgia, "Times New Roman", serif; background:var(--paper); color:var(--ink); line-height:1.55; }
+  main { max-width:660px; margin:0 auto; }
+  .boundary { background:#fdeaea; border-left:6px solid #b03030; color:#5c1c1c; border-radius:6px; padding:1rem 1.1rem; }
+  .boundary strong { display:block; margin-bottom:.3rem; }
+  body { padding:2rem 1.2rem; }
+  h1 { font-size:1.8rem; color:var(--accent); }
+  .boundary { margin:1rem 0 1.4rem; }
+  .panel { background:var(--soft); border-left:5px solid var(--accent); border-radius:6px; padding:1rem 1.1rem; margin-bottom:1.1rem; }
+  h2 { font-size:1.1rem; margin-bottom:.6rem; }
+  p.note { font-size:.9rem; margin-bottom:.4rem; }
+  label { display:block; font-size:.9rem; margin:.45rem 0 .1rem; }
+  input { width:100%; padding:.45rem .55rem; font-size:1rem; border:1px solid #dba878; border-radius:6px; background:#fff; color:var(--ink); }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+  .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.6rem; }
+  .out { margin-top:.7rem; font-size:.98rem; background:#fff; border:1px dashed #dba878; border-radius:6px; padding:.6rem .7rem; min-height:2.4rem; overflow-wrap:anywhere; }
+  .out.err { border-color:#b03030; color:#8a1f1f; }
+  footer { margin-top:1.8rem; font-size:.85rem; color:#9a7658; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Thread Math</h1>
+  <div class="boundary">
+    <strong>Boundary: arithmetic only</strong>
+    This page converts thread pitch and works out turns from the numbers you type. The pitch, the number of starts and the distance are yours to read off your own screw or its label. It has not seen your thread and does not know its form, fit, class, material or the load it will carry, and it gives no verdict that a thread suits a job or that a part is the right one. Every number is your own entry.
+  </div>
+
+  <div class="panel">
+    <h2>The inch truth</h2>
+    <p class="note">Threads per inch turned into a pitch in mm, with an inch taken as exactly 25.4 mm.</p>
+    <div class="row2">
+      <div><label for="a-t">Threads per inch</label><input id="a-t" type="text" value="20"></div>
+    </div>
+    <div class="out" id="a-out"></div>
+  </div>
+
+  <div class="panel">
+    <h2>The pitch truth</h2>
+    <p class="note">A pitch in mm turned into threads per inch.</p>
+    <div class="row2">
+      <div><label for="b-p">Pitch (mm)</label><input id="b-p" type="text" value="1.5"></div>
+    </div>
+    <div class="out" id="b-out"></div>
+  </div>
+
+  <div class="panel">
+    <h2>The turns truth</h2>
+    <p class="note">The turns that move a nut or screw a distance, using the pitch above. Each start moves it one more pitch a turn.</p>
+    <div class="row2">
+      <div><label for="c-s">Starts</label><input id="c-s" type="text" value="1"></div>
+      <div><label for="c-l">Distance (mm)</label><input id="c-l" type="text" value="25"></div>
+    </div>
+    <div class="out" id="c-out"></div>
+  </div>
+
+  <footer>Thread Math is exact arithmetic over the numbers you enter. <a href="index.html">Why it exists</a>.</footer>
+</main>
+<script src="engine.js"></script>
+<script>
+  function show(id, fn) {
+    const out = document.getElementById(id);
+    try { out.textContent = fn(); out.classList.remove("err"); }
+    catch (e) { out.textContent = e.message; out.classList.add("err"); }
+  }
+  function recalc() {
+    const v = (id) => document.getElementById(id).value;
+    show("a-out", () => tpiTruth(v("a-t")));
+    show("b-out", () => pitchTruth(v("b-p")));
+    show("c-out", () => turnsTruth(v("b-p"), v("c-s"), v("c-l")));
+  }
+  document.querySelectorAll("input").forEach((el) => {
+    el.addEventListener("input", recalc);
+    el.addEventListener("change", recalc);
+  });
+  recalc();
+</script>
+</body>
+</html>
