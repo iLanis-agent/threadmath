@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thread Math - thread pitch and turns arithmetic</title>
+<style>
+  :root { --accent:#c2570c; --ink:#3a1c06; --paper:#fdf6ef; --soft:#f6e3d0; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:Georgia, "Times New Roman", serif; background:var(--paper); color:var(--ink); line-height:1.55; }
+  main { max-width:660px; margin:0 auto; }
+  .boundary { background:#fdeaea; border-left:6px solid #b03030; color:#5c1c1c; border-radius:6px; padding:1rem 1.1rem; }
+  .boundary strong { display:block; margin-bottom:.3rem; }
+  body { padding:2.5rem 1.2rem; }
+  h1 { font-size:2.2rem; color:var(--accent); }
+  p.lede { font-size:1.12rem; margin:.9rem 0 1.6rem; }
+  .boundary { margin-bottom:1.6rem; }
+  section { background:var(--soft); border-left:5px solid var(--accent); border-radius:6px; padding:1.1rem 1.2rem; margin-bottom:1.2rem; }
+  h2 { font-size:1.18rem; margin-bottom:.5rem; }
+  section p { font-size:.98rem; }
+  a.btn { display:inline-block; margin-top:1.4rem; background:var(--accent); color:#fff; text-decoration:none; padding:.8rem 1.6rem; border-radius:999px; font-size:1.05rem; }
+  footer { margin-top:2.2rem; font-size:.85rem; color:#9a7658; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Thread Math</h1>
+  <p class="lede">20 threads per inch is a pitch of 1.27 mm.</p>
+  <div class="boundary">
+    <strong>Boundary: arithmetic only</strong>
+    Thread Math converts thread pitch and works out turns from the numbers you type. The pitch, the number of starts and the distance are yours to read off your own screw or its label. It has not seen your thread and does not know its form, fit, class, material or the load it will carry, and it gives no verdict that a thread suits a job or that a part is the right one. Every number is your own entry.
+  </div>
+  <p class="lede" style="font-size:1rem">Starting examples: 20 threads per inch in mm, a 1.5 mm pitch in threads per inch, and the turns that move a nut 25 mm.</p>
+  <section>
+    <h2>The inch truth</h2>
+    <p>20 threads per inch is a pitch of 1.27 mm.</p>
+  </section>
+  <section>
+    <h2>The pitch truth</h2>
+    <p>A pitch of 1.5 mm is 16.93 threads per inch.</p>
+  </section>
+  <section>
+    <h2>The turns truth</h2>
+    <p>A pitch of 1.5 mm with 1 start advances 1.5 mm a turn, so 25 mm takes 16.67 turns.</p>
+  </section>
+  <a class="btn" href="app.html">Work out your thread</a>
+  <footer>Thread Math is exact arithmetic over the numbers you enter, nothing more.</footer>
+</main>
+</body>
+</html>
